@@ -1,0 +1,66 @@
+# OPGD CLI
+
+> OPGD 地理探测器平台命令行客户端。地理探测器（Geodetector）用于度量空间分异：因子探测（q 值）、交互探测、风险探测、生态探测。本工具上传 CSV/Excel → 提交分析 → 终端渲染报告 → 导出 ZIP/PNG。免登录试用通道开箱即用；完整能力需平台账号。
+
+Version: 0.1.0 · Language: Python 3.10+ · License: MIT
+
+## Install
+
+```bash
+pip install opgd-cli
+```
+
+## Verify environment
+
+```bash
+opgd doctor
+```
+
+输出四项检查（配置/服务健康/登录态/额度），全 ✔ 为正常，✗ 项按详情列处理。退出码 1 = 存在未通过项。
+
+## Commands
+
+| 命令 | 作用 | 鉴权 |
+|------|------|------|
+| `opgd trial <file> -y <col> -x <cols> [--cat <cols>]` | 免登录试用：同步分析，返回因子探测 q 值（其余模块遮罩；方法与分级数由服务端自动寻优） | 无 |
+| `opgd auth login [-u <account>] [--password-stdin]` | 登录，token 存 ~/.opgd/config.toml，有效期 30 分钟 | 无 |
+| `opgd auth whoami [--json]` | 账号信息：角色/剩余次数/已用次数/状态 | 需要 |
+| `opgd upload <file> [--json]` | 上传数据，返回列元数据与角色推荐（upload_id 一次性） | 需要 |
+| `opgd analyze <file> -y <col> -x <cols> [--cat <cols>] [--methods <list>] [--bins MIN:MAX] [--model opgd\|fuzzygd] [--fuzziness quick\|fine\|custom] [--perm N] [--upload-id N] [--no-wait] [--json]` | 正式通道一条龙：上传→提交→轮询→渲染完整报告 | 需要 |
+| `opgd status <task_id> [--json]` | 查询任务状态 | 需要 |
+| `opgd wait <task_id> [--json]` | 等待任务完成并渲染报告 | 需要 |
+| `opgd tasks [--limit N] [--json]` | 历史任务列表 | 需要 |
+| `opgd cancel <task_id>` | 取消排队中/计算中任务 | 需要 |
+| `opgd report <task_id> [--json]` | 终端渲染完整报告（因子/交互/风险/生态） | 需要 |
+| `opgd export <task_id> -o <dir> [--unzip] [--png]` | 下载报告 ZIP（可选解压）+ 因子/交互图表 PNG | 需要 |
+
+参数取值：
+
+- `--methods`：`equal_interval` `quantile` `natural_breaks` `geometric` `std_mean`（fuzzygd 另有 `kmeans` `rgd`）
+- `--bins`：`MIN:MAX`，2 ≤ MIN ≤ MAX ≤ 20
+- `--perm`：置换检验次数 0~5000（仅 fuzzygd）
+- `-x`/`--cat`：重复传参或逗号分隔（`-x A -x B` 等价 `-x A,B`）
+
+## Analysis request contract
+
+服务端要求：Y 不得出现在 X 中；`--cat` 声明的列必须属于 X；上传文件 ≤ 50MB。
+
+## Critical behaviors
+
+- 上传文件一次性：任务结束后服务端删除文件，第二次分析直接传文件路径（勿复用 --upload-id）
+- 文本/分类列必须 `--cat` 声明，否则有效样本清零
+- 登录 token 30 分钟过期，过期后任意正式通道命令以退出码 3 提示
+- 免费通道限流约 5 次分析/分钟/IP；429 为正常保护
+- 任务失败自动返还分析次数
+
+## Exit codes
+
+`0` 成功 · `2` 服务端错误/网络不通 · `3` 登录过期或凭据错误 · `4` 额度不足 · `5` 触发限流 · `6` 任务失败（stderr 含原因） · `7` 未登录 · `130` 用户中断等待（任务仍在服务端运行）
+
+## Machine-readable output
+
+任何列结果命令加 `--json` 输出原始 JSON（stdout 纯净，无装饰字符），适合脚本与 Agent 解析。报告 JSON 顶层字段：`summary`、`optimal_params`（按变量：`{method, bins, q_value}`）、`factor_detector`、`interaction_detector.pairs|matrix`、`risk_detector`、`ecological_detector`。
+
+## Self-hosted instance
+
+`--server https://your-host`（每命令可用）或环境变量 `OPGD_SERVER`；`OPGD_NO_PROXY=1` 强制直连。
