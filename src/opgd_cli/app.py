@@ -48,8 +48,28 @@ def main_callback(
     """OPGD 地理探测器平台命令行客户端。"""
 
 
+def _force_utf8_streams() -> None:
+    """把 stdout/stderr 强制为 UTF-8。
+
+    Windows 控制台/管道默认可能是 cp1252 或 cp936，中文帮助文本与 --json
+    （数据列名常为中文）会触发 UnicodeEncodeError。errors="replace" 保证
+    任何环境下 CLI 都不因编码崩溃。
+    """
+    import sys
+
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is None:
+            continue
+        try:
+            reconfigure(encoding="utf-8", errors="replace")
+        except Exception:  # pragma: no cover - 个别流（如 IDE 捕获器）不支持
+            pass
+
+
 def main() -> None:
     """console_scripts 入口：opgd = opgd_cli.app:main"""
+    _force_utf8_streams()
     app()
 
 
