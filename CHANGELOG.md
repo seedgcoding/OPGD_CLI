@@ -2,6 +2,17 @@
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [0.1.1] - 2026-11-17
+
+### 修复
+
+- Windows 非 UTF-8 控制台/管道的 UnicodeEncodeError（stdout/stderr 强制 UTF-8）
+
+### 变更
+
+- 项目更名：「基于最优参数的地理探测器（OPGD）」，补充算法出处（Song et al., 2020）
+- 仓库迁移至 github.com/seedgcoding/OPGD_CLI
+
 ## [0.1.0] - 2026-11-12
 
 ### 新增

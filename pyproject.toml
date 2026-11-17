@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "opgd-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "基于最优参数的地理探测器（OPGD, Optimal Parameters-based Geographical Detector）平台命令行客户端 —— 上传数据、提交分析、终端渲染报告"
 readme = "README.md"
 requires-python = ">=3.10"
