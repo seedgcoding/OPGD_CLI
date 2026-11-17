@@ -1,6 +1,6 @@
 """OPGD CLI 应用入口。
 
-opgd = OPGD 地理探测器平台命令行客户端
+opgd = 基于最优参数的地理探测器（OPGD）平台命令行客户端
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ from .commands.doctor import doctor as _doctor
 app = typer.Typer(
     name="opgd",
     help=(
-        "[bold]OPGD[/bold] —— OPGD 地理探测器平台命令行客户端\n\n"
+        "[bold]OPGD[/bold] —— 基于最优参数的地理探测器（Optimal Parameters-based Geographical Detector）\n\n"
         "免登录试用：[bold]opgd trial data.csv -y GDP -x X1 X2[/bold]\n"
         "正式通道（完整报告/导出）：[bold]opgd login[/bold] 后 [bold]opgd analyze ...[/bold]\n\n"
         "[dim]退出码：0 成功 · 2 服务端/网络错误 · 3 登录过期 · 4 额度不足 · "
@@ -45,7 +45,7 @@ def main_callback(
         False, "--version", "-V", callback=_version_callback, is_eager=True, help="显示版本号"
     ),
 ) -> None:
-    """OPGD 地理探测器平台命令行客户端。"""
+    """基于最优参数的地理探测器（OPGD）平台命令行客户端。"""
 
 
 def _force_utf8_streams() -> None:

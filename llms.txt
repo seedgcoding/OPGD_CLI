@@ -1,6 +1,6 @@
 # OPGD CLI
 
-> OPGD 地理探测器平台命令行客户端。地理探测器（Geodetector）用于度量空间分异：因子探测（q 值）、交互探测、风险探测、生态探测。本工具上传 CSV/Excel → 提交分析 → 终端渲染报告 → 导出 ZIP/PNG。免登录试用通道开箱即用；完整能力需平台账号。
+> 基于最优参数的地理探测器（OPGD, Optimal Parameters-based Geographical Detector）平台命令行客户端。地理探测器（Geodetector）用于度量空间分异：因子探测（q 值）、交互探测、风险探测、生态探测。本工具上传 CSV/Excel → 提交分析 → 终端渲染报告 → 导出 ZIP/PNG。免登录试用通道开箱即用；完整能力需平台账号。
 
 Version: 0.1.0 · Language: Python 3.10+ · License: MIT
 

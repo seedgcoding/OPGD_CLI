@@ -3,7 +3,9 @@
 [![CI](https://github.com/seedgcoding/OPGD_CLI/actions/workflows/ci.yml/badge.svg)](https://github.com/seedgcoding/OPGD_CLI/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/badge/PyPI-opgd--cli-blue)](https://pypi.org/project/opgd-cli/)
 
-[OPGD 地理探测器平台](https://opgd500.kkbvip.top) 的命令行客户端 —— 在终端完成 **上传数据 → 提交分析 → 查看报告 → 导出结果** 全流程。
+[OPGD 平台（基于最优参数的地理探测器）](https://opgd500.kkbvip.top) 的命令行客户端 —— 在终端完成 **上传数据 → 提交分析 → 查看报告 → 导出结果** 全流程。
+
+**OPGD**（Optimal Parameters-based Geographical Detector，基于最优参数的地理探测器）是地理探测器（Geodetector）的增强算法（Song et al., 2020）：遍历离散化方法与分级数组合自动寻优，克服传统 Geodetector 人为分级的主观性。
 
 纯 HTTP 客户端实现，不依赖平台代码，兼容任意自部署实例（`--server` 指定地址即可）。
 
