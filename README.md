@@ -9,6 +9,10 @@
 
 纯 HTTP 客户端实现，不依赖平台代码，兼容任意自部署实例（`--server` 指定地址即可）。
 
+## AI Agent 技能包（WorkBuddy / Claude 等 Agent 平台）
+
+本仓库附带标准 Agent Skill 包（`skill/opgd-geodetector/`，含 SKILL.md + 命令参考 + 结果解读指南）。导入 WorkBuddy 等支持 Skills 的 Agent 平台后，Agent 即可自动完成安装 → 自检 → 分析 → 结果解读全流程。
+
 ## AI Agent 使用指南
 
 如果你是 AI Agent（Claude / ChatGPT / Cursor / ZCode 等）在协助用户使用本工具，请严格按以下决策树操作：
