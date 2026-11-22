@@ -1,6 +1,6 @@
 ---
 name: opgd-geodetector
-version: "1.0.0"
+version: "1.1.0"
 display_name: OPGD 地理探测器分析
 display_name_en: OPGD Geodetector Analysis
 description: OPGD 最优参数地理探测器（Geodetector）分析技能。适用于：地理探测器分析、空间分异/空间异质性分析、因子探测、交互探测、风险探测、生态探测、q 值计算、影响因素定量归因、驱动力分析、空间统计、城市与经济地理研究、栅格数据转分析表格、论文数据分析。当用户提到"地理探测器""geodetector""q值""空间分异""影响因素""驱动因子""归因分析"，或想做空间数据的定量归因分析时使用——即使用户没有说出工具名。免登录即可试用因子探测；完整四探测器报告、图表导出与更多分析次数需在官网 https://opgd500.kkbvip.top 注册账号或联系平台客服开通。
